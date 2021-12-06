@@ -1,14 +1,8 @@
-def http_get(url):
-    import socket
-    _, _, host, path = url.split('/', 3)
-    addr = socket.getaddrinfo(host, 80)[0][-1]
-    s = socket.socket()
-    s.connect(addr)
-    s.send(bytes('GET /%s HTTP/1.0\r\nHost: %s\r\n\r\n' % (path, host), 'utf8'))
-    while True:
-        data = s.recv(100)
-        if data:
-            print(str(data, 'utf8'), end='')
-        else:
-            break
-    s.close()
+def http_post():
+    import urequests
+    import createMeasurementJson
+    url = "https://isensiot-api.herokuapp.com/api/mq135"
+    headers = {'content-type': 'application/json'}
+    data = createMeasurementJson.createJson()
+    urequests.post(url, data=data, headers=headers)
+    #JSON dump our sensor data here
