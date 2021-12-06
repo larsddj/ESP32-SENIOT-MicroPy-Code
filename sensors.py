@@ -1,51 +1,33 @@
 import time
+from measurements import MQMeasurement, MicrophoneMeasurement, HumidTempMeasurement
 
 #Sensor lists are of variable size but always end with a timestamp
 #for now the order of this is hardcoded (check docs) but this will most likely be OOP inheritance'd later on
 
 def get_microphone_measurements():
     clockStart = time.time()
-    #dict for values - hardcoded for now
-    measurements = {
-        "decibel":99,
-        "timeSpentMs":None
-    }
+    mic = MicrophoneMeasurement(100.34)
     clockEnd = time.time()
     timeSpentMs = clockEnd-clockStart
     
-    print("these prints are from sensor.py")
-    print(timeSpentMs)
-    print(measurements)
-    
-    measurements["timeSpentMs"] = timeSpentMs 
-    return measurements
+    mic.setTimeSpent(timeSpentMs) 
+    return mic
 
 def get_mq_measurements():
     clockStart = time.time()
-    measurements = {
-        "NH3":99,
-        "NO2":99,
-        "Alcohol":99,
-        "Benzene":99,
-        "Smoke":99,
-        "CO2":99,
-        "timeSpentMs":None
-    }
+    mq = MQMeasurement(100,99,88,33,203,1234)
+
     clockEnd = time.time()
     timeSpentMs = clockEnd-clockStart
-    
-    measurements["timeSpentMs"] = timeSpentMs 
-    return measurements
+    mq.setTimeSpent(timeSpentMs)
+
+    return mq
 
 def get_humTemp_measurements():
     clockStart = time.time()
-    measurements = {
-        "Humidity":99,
-        "Temperature":99,
-        "timeSpentMs":None
-    }
+    humTemp = HumidTempMeasurement(94, 33.45)
     clockEnd = time.time()
     timeSpentMs = clockEnd-clockStart
     
-    measurements["timeSpentMs"] = timeSpentMs 
-    return measurements
+    humTemp.setTimeSpent(timeSpentMs)
+    return humTemp
