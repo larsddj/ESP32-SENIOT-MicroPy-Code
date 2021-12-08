@@ -1,3 +1,4 @@
+# on startup: connect to our network for internet access
 def do_connect():
     import network
     sta_if = network.WLAN(network.STA_IF)
@@ -8,3 +9,8 @@ def do_connect():
         while not sta_if.isconnected():
             pass
     print('network config:', sta_if.ifconfig())
+
+# after connection, start our regular runtime loop
+def start_runtime():
+    import runtimeLoop as runtime
+    runtime.runtimeExecution()
