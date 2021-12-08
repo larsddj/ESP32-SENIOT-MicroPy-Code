@@ -3,6 +3,7 @@ def createJson():
     import json as j
 
     returnableJson = ""
+    # measure measurement and dump the object structure into usable JSON
     returnableJson = j.dumps(s.get_mq_measurements().__dict__)
     """print("the json returned stored in returnableJson:")
     print(returnableJson)
