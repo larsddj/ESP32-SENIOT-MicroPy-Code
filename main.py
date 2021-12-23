@@ -14,3 +14,6 @@ def do_connect():
 def start_runtime():
     import runtimeLoop as runtime
     runtime.runtimeExecution()
+
+do_connect()
+start_runtime()
