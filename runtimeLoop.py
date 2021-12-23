@@ -1,4 +1,6 @@
 import httpRequests as api
+import time 
+import machine
 
 # this file executes the runtime loop of the sensor
 # from here we call the processes needed to do routine behaviour
@@ -6,13 +8,13 @@ import httpRequests as api
 
 def deep_sleep(msAmount):
     # machine's system clock
-    rtc = machine.RTC()
+    #rtc = machine.RTC()
     # create the irq object that will trigger from ALARM0; here we wake from deep sleep
-    rtc.irq(trigger=rtc.ALARM0, wake=machine.DEEPSLEEP)
+    #rtc.irq(trigger=rtc.ALARM0, wake=machine.DEEPSLEEP)
     # fire off the alarm after msAmount of milliseconds
-    rtc.alarm(rtc.ALARM0, msAmount)
+    #rtc.alarm(rtc.ALARM0, msAmount)
     # put the device to sleep
-    machine.deepsleep()
+    machine.deepsleep(msAmount)
 
 # our default execution cycle
 def runtimeExecution():
@@ -20,7 +22,9 @@ def runtimeExecution():
     api.http_post()
 
     # temporary sleep to ensure we can catch our device awake
-    sleep(5)
+    print("entering temp sleep")
+    time.sleep(60)
+    print("sleeps over, entering deep sleep")
 
     # finally we enter our deep sleep state; rebooting the whole process on wakeup
     deep_sleep(10000)
