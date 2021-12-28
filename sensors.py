@@ -1,8 +1,9 @@
 import time
+from machine import Pin, ADC
 from measurements import MQMeasurement, MicrophoneMeasurement, HumidTempMeasurement
 
-#Sensor lists are of variable size but always end with a timestamp
-#for now the order of this is hardcoded (check docs) but this will most likely be OOP inheritance'd later on
+# these sensor methods retrieve measurements from a sensor and attach a timestamp object
+# these measurements and timestamps are used for JSON serialization in createMeasurementJson.py
 
 def get_microphone_measurements():
     clockStart = time.time()
@@ -15,7 +16,10 @@ def get_microphone_measurements():
 
 def get_mq_measurements():
     clockStart = time.time()
-    mq = MQMeasurement(100,99,88,33,203,1234)
+    mqSensor = ADC(Pin(39))         #The GPIO pin the sensor is plugged into on the ESP32
+    mqSensor.atten(ADC.ATTN_11DB)   #This sets the maximum range of the sensor to 3.3v which is the input limit of the ESP32
+
+    mq = MQMeasurement(mqSensor.read())
 
     clockEnd = time.time()
     timeSpentMs = clockEnd-clockStart
