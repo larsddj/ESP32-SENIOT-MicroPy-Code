@@ -1,11 +1,6 @@
 class MQMeasurement:
-    def __init__(self,NH3,NO2,Alcohol,Benzene,Smoke,CO2):
-        self.NH3 = NH3
-        self.NO2 = NO2
-        self.Alcohol = Alcohol
-        self.Benzene = Benzene
-        self.Smoke = Smoke
-        self.CO2 = CO2
+    def __init__(self,Airquality):
+        self.Airquality = Airquality
         self.timeSpentMs = 0
 
     def setTimeSpent(self, timeSpentMs):
