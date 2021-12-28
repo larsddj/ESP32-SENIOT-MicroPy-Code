@@ -1,6 +1,6 @@
 class MQMeasurement:
-    def __init__(self,Airquality):
-        self.Airquality = Airquality
+    def __init__(self,airQuality):
+        self.airQuality = airQuality
         self.timeSpentMs = 0
 
     def setTimeSpent(self, timeSpentMs):
