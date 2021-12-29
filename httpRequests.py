@@ -9,7 +9,8 @@ def http_post():
     data = createMeasurementJson.createMicrophoneJson()
     print(data)
     # post the JSON
-    urequests.post(url, data=data, headers=headers)
+    response = urequests.post(url, data=data, headers=headers)
+    response.close()
 
     # first we access the endpoint for MQ sensordata
     url = "https://isensiot-api.herokuapp.com/api/createmq135"
@@ -17,7 +18,8 @@ def http_post():
     # measure measurements and create JSON from it
     data = createMeasurementJson.createMQJson()
     print(data)
-    urequests.post(url, data=data, headers=headers)
+    response = urequests.post(url, data=data, headers=headers)
+    response.close()
 
 
 
