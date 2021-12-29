@@ -13,7 +13,7 @@ def get_microphone_measurements():
     micSensor = ADC(Pin(micSensorPin))         
     micSensor.atten(ADC.ATTN_11DB)   #This sets the maximum range of the sensor to 3.3v which is the input limit of the ESP32
 
-    micReading = MQMeasurement(mqSensor.read())
+    micReading = MicrophoneMeasurement(micSensor.read())
     clockEnd = time.time_ns()
     timeSpentMs = (clockEnd-clockStart)/1000000
     
