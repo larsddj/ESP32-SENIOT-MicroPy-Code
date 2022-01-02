@@ -1,6 +1,10 @@
 import httpRequests as api
 import time 
+import esp32
 import machine
+from machine import Pin
+
+wakeupPin = Pin(34, mode = Pin.IN)
 
 # this file executes the runtime loop of the sensor
 # from here we call the processes needed to do routine behaviour
@@ -14,6 +18,7 @@ def deep_sleep(msAmount):
     # fire off the alarm after msAmount of milliseconds
     #rtc.alarm(rtc.ALARM0, msAmount)
     # put the device to sleep
+    esp32.wake_on_ext0(pin = wakeupPin, level = esp32.WAKEUP_ALL_LOW)
     machine.deepsleep(msAmount)
 
 # our default execution cycle
@@ -23,7 +28,7 @@ def runtimeExecution():
 
     # temporary sleep to ensure we can catch our device awake
     print("entering temp sleep")
-    time.sleep(60)
+    time.sleep(15)
     print("sleeps over, entering deep sleep")
 
     # finally we enter our deep sleep state; rebooting the whole process on wakeup
