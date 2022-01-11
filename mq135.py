@@ -59,6 +59,10 @@ class MQ135(object):
         if value == 0:
             return -1
 
+        print("DEBUG PRINTS TO FIGURE OUT WHY MATH BREAKS -------------------------------")
+        print(value)
+        print(self.RLOAD)
+        print((1023./value - 1.) * self.RLOAD)
         return (1023./value - 1.) * self.RLOAD
 
     def get_corrected_resistance(self, temperature, humidity):
@@ -68,6 +72,9 @@ class MQ135(object):
     def get_ppm(self):
         """Returns the ppm of CO2 sensed (assuming only CO2 in the air)"""
         try:
+            print(self.PARA)
+            print(self.RZERO)
+            print(self.PARB)
             return self.PARA * math.pow((self.get_resistance()/ self.RZERO), -self.PARB)
         except:
             return 0
