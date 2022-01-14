@@ -16,7 +16,7 @@ from machine import Pin
 class MQ135(object):
     """ Class for dealing with MQ13 Gas Sensors """
     # The load resistance on the board
-    RLOAD = 10.0
+    RLOAD = 20.0
     # Calibration resistance at atmospheric CO2 level
     RZERO = 76.63
     # Parameters for calculating ppm of CO2 from sensor resistance
@@ -109,7 +109,7 @@ def mq135lib_example():
     temperature = 21.0
     humidity = 25.0
 
-    mq135 = MQ135(39) # analog PIN 0
+    mq135 = MQ135(32) # analog PIN 0
 
     # loop
     while True:
@@ -122,7 +122,7 @@ def mq135lib_example():
         print("MQ135 RZero: " + str(rzero) +"\t Corrected RZero: "+ str(corrected_rzero)+
               "\t Resistance: "+ str(resistance) +"\t PPM: "+str(ppm)+
               "\t Corrected PPM: "+str(corrected_ppm)+"ppm")
-        time.sleep(0.3)
+        time.sleep(5)
 
 if __name__ == "__main__":
     mq135lib_example()
