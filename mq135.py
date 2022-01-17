@@ -62,8 +62,8 @@ class MQ135(object):
         print("DEBUG PRINTS TO FIGURE OUT WHY MATH BREAKS -------------------------------")
         print(value)
         print(self.RLOAD)
-        print((1023./value - 1.) * self.RLOAD)
-        return (1023./value - 1.) * self.RLOAD
+        print((4095./value - 1.) * self.RLOAD)
+        return (4095./value - 1.) * self.RLOAD
 
     def get_corrected_resistance(self, temperature, humidity):
         """Gets the resistance of the sensor corrected for temperature/humidity"""
