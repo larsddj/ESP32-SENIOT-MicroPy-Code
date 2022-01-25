@@ -106,8 +106,8 @@ class MQ135(object):
 def mq135lib_example():
     """MQ135 lib example"""
     # setup
-    temperature = 21.0
-    humidity = 25.0
+    temperature = 22.0
+    humidity = 40.0
 
     mq135 = MQ135(34) # analog PIN 0
 
