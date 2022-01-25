@@ -33,7 +33,7 @@ class MQ135(object):
     CORG = 1.130128205
 
     # Atmospheric CO2 level for calibration purposes
-    ATMOCO2 = 397.13
+    ATMOCO2 = 419.80
 
 
     def __init__(self, pin):
@@ -109,7 +109,7 @@ def mq135lib_example():
     temperature = 21.0
     humidity = 25.0
 
-    mq135 = MQ135(32) # analog PIN 0
+    mq135 = MQ135(34) # analog PIN 0
 
     # loop
     while True:
