@@ -19,6 +19,36 @@ def get_microphone_measurements():
     micReading.setTimeSpent(timeSpentMs) 
     return micReading
 
+def get_microphone_measurements_avg():
+    clockStart = time.time_ns()
+    micSensor = Pin(micSensorPin, Pin.IN)         
+    
+    # get an average of the given amount of samples
+    i = 0
+    micMeasurements = [] 
+    while(i < mic_sample_amount):
+        value = micSensor.value()
+        micMeasurements.append(value)
+        i+=1
+
+    total = 0
+    for x in micMeasurements:
+        total+=x
+    
+    average = total/mic_sample_amount
+    if(average < mic_cutoff_value):
+        micAvgReading = MicrophoneMeasurement(1)
+    else:
+        micAvgReading = MicrophoneMeasurement(0)
+
+
+    clockEnd = time.time_ns()
+    timeSpentMs = (clockEnd-clockStart)/1000000
+    micAvgReading.setTimeSpent(timeSpentMs)
+    
+    return micAvgReading
+
+    
 def get_mq_measurements():
     clockStart = time.time_ns()
     mqSensor = ADC(Pin(mqSensorPin))         
