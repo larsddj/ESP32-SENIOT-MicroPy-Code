@@ -10,12 +10,27 @@ micSensorPin = 34 # the GPIO pin the microphone sensor is plugged into on the ES
 # these sensor methods retrieve measurements from a sensor and attach a timestamp object
 # these measurements and timestamps are used for JSON serialization in createMeasurementJson.py
 
+
+# because our sensor has quite a lot of jitter we need to account for it
+# we can do this by taking a large sample of data, averaging it out and seeing if the average is above a given threshold
 def get_microphone_measurements():
     micSensor = Pin(micSensorPin, Pin.IN)         
+    i = 0
+    micMeasurements = [] 
+    while(i<5000):
+        value = micSensor.value()
+        micMeasurements.append(value)
+        print(value)
+        i+=1
 
-    while(1):
-        micReading = MicrophoneMeasurement(micSensor.read())
-        print(micReading.decibel)
+    total = 0
+    for x in micMeasurements:
+        total+=x
+    
+    print(total)
+    average = total/5000
+    print(average)
+    
 
 
 def get_mq_measurements():
@@ -28,7 +43,7 @@ def get_mq_measurements():
 
 #testing method for the dht11 sensor
 def get_dht11_measurements():
-    sensor = dht.DHT11(Pin(14))
+    sensor = dht.DHT11(Pin(4))
 
     while(1):
         sleep(2)
