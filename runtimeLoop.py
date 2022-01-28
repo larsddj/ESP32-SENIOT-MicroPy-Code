@@ -5,6 +5,8 @@ import machine
 from machine import Pin
 
 wakeupPin = Pin(34, mode = Pin.IN)
+deep_sleep_time_seconds = 60
+
 
 # this file executes the runtime loop of the sensor
 # from here we call the processes needed to do routine behaviour
@@ -28,8 +30,8 @@ def runtimeExecution():
 
     # temporary sleep to ensure we can catch our device awake
     print("entering temp sleep")
-    time.sleep(15)
+    time.sleep(2) # this can be removed in the final code build
     print("sleeps over, entering deep sleep")
 
     # finally we enter our deep sleep state; rebooting the whole process on wakeup
-    deep_sleep(10000)
+    deep_sleep(deep_sleep_time_seconds * 1000)
