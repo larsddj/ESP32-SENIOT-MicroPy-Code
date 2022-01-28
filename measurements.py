@@ -7,8 +7,8 @@ class MQMeasurement:
         self.timeSpentMs = timeSpentMs
 
 class MicrophoneMeasurement:
-    def __init__(self,decibel):
-        self.decibel = decibel
+    def __init__(self,soundPollution):
+        self.soundPollution = soundPollution
         self.timeSpentMs = 0
 
     def setTimeSpent(self, timeSpentMs):
