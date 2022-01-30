@@ -30,6 +30,25 @@ def get_microphone_measurements():
     print(total)
     average = total/5000
     print(average)
+
+def get_microphone_measurement_collumn_1mswait():
+    micSensor = Pin(micSensorPin, Pin.IN)         
+    i = 0
+    micMeasurements = [] 
+    while(i<5000):
+        value = micSensor.value()
+        micMeasurements.append(value)
+        print(value)
+        sleep(0.001)
+        i+=1
+
+    total = 0
+    for x in micMeasurements:
+        total+=x
+    
+    print(total)
+    average = total/5000
+    print(average)
     
 
 
@@ -55,12 +74,26 @@ def get_dht11_measurements():
         print('Temperature: %3.1f F' %temp_f)
         print('Humidity: %3.1f %%' %hum)
 
-#method to compare multiple dht11's for calibration purposes
-def compare_dht11_measurements():
-    sensor = dht.DHT11(Pin(14))
-    sensor2 = dht.DHT11(Pin(27))
+#method for getting dht11 calibration data
+def get_dht11_measurements_collumn_1secwait():
+    sensor = dht.DHT11(Pin(4))
 
     while(1):
+        sleep(1)
+        sensor.measure()
+        temp = sensor.temperature()
+        hum = sensor.humidity()
+        print(str(temp)+"\t"+str(hum))
+
+#method to compare multiple dht11's for calibration purposes
+def compare_dht11_measurements_collumn_2secwait():
+    sensor = dht.DHT11(Pin(4))
+    sensor2 = dht.DHT11(Pin(2))
+    dht1Measurements = [] 
+    dht2Measurements = [] 
+
+    i=0
+    while(i < 100):
         sleep(2)
         sensor.measure()
         sensor2.measure()
@@ -68,11 +101,14 @@ def compare_dht11_measurements():
         temp2 = sensor2.temperature()
         hum = sensor.humidity()
         hum2 = sensor2.humidity()
-        temp_f = temp * (9/5) + 32.0
-        temp_f2 = temp2 * (9/5) + 32.0
-        print('Temperature: %3.1f C' %temp)
-        print('Temperature: %3.1f F' %temp_f)
-        print('Humidity: %3.1f %%' %hum)
-        print('Temperature 2: %3.1f C' %temp2)
-        print('Temperature 2: %3.1f F' %temp_f2)
-        print('Humidity 2: %3.1f %%' %hum2)
+        dht1Measurements.append(str(temp)+"\t"+str(hum))
+        dht2Measurements.append(str(temp2)+"\t"+str(hum2))
+        i+=1
+    
+    print("----------!NOW PRINTING DHT11 1 MEASUREMENTS! (TEMP CELSIUS - HUMIDITY)---------------")
+    for dhtMeasurementString in dht1Measurements:
+        print(dhtMeasurementString)
+    
+    print("----------!NOW PRINTING DHT11 2 MEASUREMENTS! (TEMP CELSIUS - HUMIDITY)---------------")
+    for dhtMeasurementString in dht2Measurements:
+        print(dhtMeasurementString)
