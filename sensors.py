@@ -11,7 +11,7 @@ dhtSensorPin = 4 # the GPIO pin the DHT11 sensor is plugged into on the ESP32
 dhtErrorIterations = 5 # the amount of times a DHT11 measurement will be attempted before giving up
 
 # we draw multiple samples and average the digital samples out to a single number, mic_cutoff_value refers to this
-mic_cutoff_value = 0.95 # the cutoff value at which we determine sound pollution has occured
+mic_cutoff_value = 0.9488 # the cutoff value at which we determine sound pollution has occured
 mic_sample_amount = 5000 # the amount of digital microphone values we poll
 
 # these sensor methods retrieve measurements from a sensor and attach a timestamp object
